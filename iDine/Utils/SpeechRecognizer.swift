@@ -22,7 +22,7 @@ class SpeechRecognizer {
     recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
   }
 
-  func listen() {
+  func listen(completion:@escaping (String) -> ()) {
     startRecording()
     guard let recognizer = SFSpeechRecognizer(), recognizer.isAvailable,
           let recognitionRequest = recognitionRequest else {
@@ -37,11 +37,9 @@ class SpeechRecognizer {
         return
       }
       
-      print("You said: \(result.bestTranscription.formattedString), final : \(result.isFinal)")
-      
       if result.isFinal {
         self?.stopRecording()
-        self?.update(withResult: result)
+        completion(result.bestTranscription.formattedString)
       }
     }
   }
@@ -73,10 +71,6 @@ class SpeechRecognizer {
     print(withMessage)
   }
 
-  private func update(withResult result: SFSpeechRecognitionResult) {
-    
-  }
-  
   private func startRecording() {
     let recordingFormat = inputNode.outputFormat(forBus: 0)
     inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { [weak self] (buffer, _) in

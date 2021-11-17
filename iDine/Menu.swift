@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct MenuSection: Codable, Identifiable {
+struct MenuSection: Codable, Identifiable, Equatable {
     var id: UUID
     var name: String
     var items: [MenuItem]
