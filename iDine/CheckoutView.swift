@@ -10,9 +10,9 @@ import SwiftUI
 struct CheckoutView: View {
     @EnvironmentObject var order: Order
     @State private var paymentType = "Cash"
-    @State private var addLoyaltyDetails = false
-    @State private var loyaltyNumber = ""
-    @State private var tipAmount = 15
+    @State private var addPromoCode = false
+    @State private var promoCode = ""
+    @State private var tipAmount = 0
     @State private var showingPaymentAlert = false
 
     let paymentTypes = ["Cash", "Credit Card", "iDine Points"]
@@ -31,33 +31,38 @@ struct CheckoutView: View {
     var body: some View {
         Form {
             Section {
-                Picker("How do you want to pay?", selection: $paymentType) {
+                Picker("Payment type", selection: $paymentType) {
                     ForEach(paymentTypes, id: \.self) {
                         Text($0)
                     }
                 }
 
-                Toggle("Add iDine loyalty card", isOn: $addLoyaltyDetails.animation())
+                Toggle("Add Promo code", isOn: $addPromoCode.animation())
 
-                if addLoyaltyDetails {
-                    TextField("Enter your iDine ID", text: $loyaltyNumber)
+                if addPromoCode {
+                    TextField("Enter Promo code", text: $promoCode)
                 }
             }
 
-            Section(header: Text("Add a tip?")) {
-                Picker("Percentage:", selection: $tipAmount) {
-                    ForEach(tipAmounts, id: \.self) {
-                        Text("\($0)%")
-                    }
+          Section(header: Text("Items")) {
+            ForEach(order.items) { item in
+              HStack {
+                if item.quantity > 1 {
+                  Text("\(item.menuItem.name) X\(item.quantity)")
+                } else {
+                  Text(item.menuItem.name)
                 }
-                .pickerStyle(SegmentedPickerStyle())
+                Spacer()
+                Text("$\(item.subtotal)")
+              }
             }
+          }
 
             Section(header:
                 Text("TOTAL: \(totalPrice)")
                         .font(.largeTitle) 
             ) {
-                Button("Confirm order") {
+                Button("Send order") {
                     showingPaymentAlert.toggle()
                 }
             }

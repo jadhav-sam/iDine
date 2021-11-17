@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct ItemDetail: View {
+  @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var order: Order
     let item: MenuItem
+
+  @State private var quantity: Int = 1
+  @State private var showAlert = false
 
     var body: some View {
         VStack {
@@ -27,13 +31,25 @@ struct ItemDetail: View {
             }
 
             Text(item.description)
-                .padding()
+              .padding()
+
+          Stepper("Quantity: \(quantity)") {
+            quantity += 1
+          } onDecrement: {
+            if quantity > 1 {
+              quantity -= 1
+            }
+          }.padding()
 
             Button("Order This") {
-                order.add(item: item)
+              order.add(item: item, count: quantity)
+              showAlert = true
+              self.presentationMode.wrappedValue.dismiss()
             }
             .font(.headline)
-
+            .alert(isPresented: $showAlert, content: {
+              Alert(title: Text("\(quantity) \(item.name) added"))
+            })
             Spacer()
         }
         .navigationTitle(item.name)
@@ -44,7 +60,7 @@ struct ItemDetail: View {
 struct ItemDetail_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ItemDetail(item: MenuItem.example)
+          ItemDetail(item: MenuItem.example)
                 .environmentObject(Order())
         }
     }
