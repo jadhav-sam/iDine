@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    let menu = Bundle.main.decode([MenuSection].self, from: "menu.json")
+    @State var menu = Bundle.main.decode([MenuSection].self, from: "menu.json")
+    @State var speechRecognizer = SpeechRecognizer()
+    @State var search: KeywordSearch?
 
     var body: some View {
         NavigationView {
@@ -16,7 +18,7 @@ struct ContentView: View {
                 ForEach(menu) { section in
                     Section(header: Text(section.name)) {
                         ForEach(section.items) { item in
-                            NavigationLink(destination: ItemDetail(item: item)) {
+                          NavigationLink(destination: ItemDetail(item: item)) {
                                 ItemRow(item: item)
                             }
                         }
@@ -24,8 +26,21 @@ struct ContentView: View {
                 }
             }
             .navigationTitle("Menu")
+            .navigationBarItems(trailing: Button {
+              onDidMicTap()
+              } label: {
+                Image(systemName: "mic")
+              }
+            )
             .listStyle(GroupedListStyle())
         }
+    }
+
+   func onDidMicTap() {
+      speechRecognizer.listen { (keywords) in
+        search = KeywordSearch(menuSections: menu)
+        menu = (search?.find(keywords: keywords))!
+      }
     }
 }
 

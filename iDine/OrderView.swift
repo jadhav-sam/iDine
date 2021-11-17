@@ -14,11 +14,15 @@ struct OrderView: View {
         NavigationView {
             List {
                 Section {
-                    ForEach(order.items) { item in
+                  ForEach(order.items) { item in
                         HStack {
-                            Text(item.name)
+                          if item.quantity > 1 {
+                            Text("\(item.menuItem.name) X\(item.quantity)")
+                          } else {
+                            Text(item.menuItem.name)
+                          }
                             Spacer()
-                            Text("$\(item.price)")
+                          Text("$\(item.subtotal)")
                         }
                     }
                     .onDelete(perform: deleteItems)
