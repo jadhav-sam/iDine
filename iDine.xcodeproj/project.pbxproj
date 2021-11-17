@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		434EF0342744EE15003F35EB /* SpeechSynthesizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434EF0332744EE15003F35EB /* SpeechSynthesizer.swift */; };
+		434EF0382744EE59003F35EB /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434EF0372744EE59003F35EB /* SpeechRecognizer.swift */; };
 		513D22CC25D16D9E00C1A803 /* iDineApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513D22CB25D16D9E00C1A803 /* iDineApp.swift */; };
 		513D22CE25D16D9E00C1A803 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513D22CD25D16D9E00C1A803 /* ContentView.swift */; };
 		513D22D025D16D9F00C1A803 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 513D22CF25D16D9F00C1A803 /* Assets.xcassets */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		434EF0332744EE15003F35EB /* SpeechSynthesizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizer.swift; sourceTree = "<group>"; };
+		434EF0372744EE59003F35EB /* SpeechRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		513D22C825D16D9E00C1A803 /* iDine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iDine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		513D22CB25D16D9E00C1A803 /* iDineApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iDineApp.swift; sourceTree = "<group>"; };
 		513D22CD25D16D9E00C1A803 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,6 +55,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		434EF0322744EDB6003F35EB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				434EF0332744EE15003F35EB /* SpeechSynthesizer.swift */,
+				434EF0372744EE59003F35EB /* SpeechRecognizer.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		513D22BF25D16D9E00C1A803 = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +83,7 @@
 		513D22CA25D16D9E00C1A803 /* iDine */ = {
 			isa = PBXGroup;
 			children = (
+				434EF0322744EDB6003F35EB /* Utils */,
 				513D22CB25D16D9E00C1A803 /* iDineApp.swift */,
 				513D22CD25D16D9E00C1A803 /* ContentView.swift */,
 				513D22E925D17C4C00C1A803 /* ItemDetail.swift */,
@@ -170,6 +184,8 @@
 				513D22F025D1880700C1A803 /* MainView.swift in Sources */,
 				513D22F325D1B03500C1A803 /* CheckoutView.swift in Sources */,
 				513D22ED25D1870E00C1A803 /* OrderView.swift in Sources */,
+				434EF0342744EE15003F35EB /* SpeechSynthesizer.swift in Sources */,
+				434EF0382744EE59003F35EB /* SpeechRecognizer.swift in Sources */,
 				513D22CE25D16D9E00C1A803 /* ContentView.swift in Sources */,
 				513D22CC25D16D9E00C1A803 /* iDineApp.swift in Sources */,
 				513D22E025D16DD900C1A803 /* Order.swift in Sources */,

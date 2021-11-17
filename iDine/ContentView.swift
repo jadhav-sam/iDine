@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     let menu = Bundle.main.decode([MenuSection].self, from: "menu.json")
+    let speechRecognizer = SpeechRecognizer()
 
     var body: some View {
         NavigationView {
@@ -25,6 +26,12 @@ struct ContentView: View {
             }
             .navigationTitle("Menu")
             .listStyle(GroupedListStyle())
+        }.onAppear {
+          print("ContentView appeared!")
+          speechRecognizer.listen()
+        }
+        .onDisappear {
+          print("ContentView disappeared!")
         }
     }
 }
